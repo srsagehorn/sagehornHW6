@@ -1,0 +1,52 @@
+.navbar {
+  text-align: center;
+}
+
+.search {
+  border: 1px solid #ccc;
+}
+
+.input {
+  width: 80%;
+}
+
+main {
+  position: relative;
+  top: 100px;
+  left: 50px;
+}
+
+.leftBar {
+  background-color: rgb(232, 232, 232);
+  padding: 20px;
+}
+
+.fiveDay {
+  background-color: blue;
+  color: white;
+  display: inline;
+}
+
+.card {
+  width: 200px;
+  margin: 20px;
+  border-radius: 50;
+}
+
+.weatherIcon {
+  height: 60px;
+  width: 60px;
+}
+
+h2 {
+  margin-left: 20px;
+}
+
+.current {
+  width: 80%;
+}
+
+#uvIndex {
+  border: 1px solid black;
+  border-radius: 50%;
+}
