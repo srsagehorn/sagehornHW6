@@ -30,7 +30,7 @@ main {
 .card {
   width: 200px;
   margin: 20px;
-  border-radius: 50;
+  border-radius: 1%;
 }
 
 .weatherIcon {
@@ -49,4 +49,8 @@ h2 {
 #uvIndex {
   border: 1px solid black;
   border-radius: 50%;
+}
+
+.histCard {
+  width: 80%;
 }
