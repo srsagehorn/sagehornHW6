@@ -16,7 +16,7 @@ function appendSearch() {
 }
 
 localStorage.setItem("History", JSON.stringify(searchHist));
-
+//--------------current---------------
 $("button").on("click", function (event) {
   event.preventDefault();
   console.log(searchHist);
@@ -25,47 +25,69 @@ $("button").on("click", function (event) {
     method: "GET",
   }).then(function (results) {
     console.log(results);
+    $(".hide").removeAttr("style");
     // $(".searchHist").text("");
     searchHist.push(results.name);
     console.log(searchHist);
     appendSearch();
     $("#city").text(results.name);
     $(".searchHist").text("");
-    $("#humidity").text(results.main.humidity + " %");
-    $("#temp").text(results.main.temp + " °F");
-    $("#windSpeed").text(results.wind.speed + " mph");
+    $("#humidity").text("Humidity: " + results.main.humidity + " %");
+    $("#temp").text("Temp: " + results.main.temp + " °F");
+    $("#windSpeed").text("Wind Speed: " + results.wind.speed + " mph");
     $("#description").text(results.weather[0].description);
-    // $("#uvIndex").text();
-    $("#weatherIcon").attr(
-      "src",
-      "http://openweathermap.org/img/wn/" + results.weather[0].icon + "@2x.png"
-    );
-    var date = new Date(results.dt * 1000).toLocaleDateString("en-US");
-    $("#date").text(date);
+    // $("#uvIndex").text("UV Index: " + );
+    $("#weatherIcon").attr({
+      src:
+        "http://openweathermap.org/img/wn/" +
+        results.weather[0].icon +
+        "@2x.png",
+      alt: "Weather Icon",
+    });
+    let date = new Date(results.dt * 1000).toLocaleDateString("en-US", {
+      month: "long",
+      day: "numeric",
+    });
+
+    $("#date").text(", " + date);
+    console.log(results.coord.lat);
 
     var queryURLforecast =
-      "https://api.openweathermap.org/data/2.5/onecall?lat=" +
+      "https://api.openweathermap.org/data/2.5/onecall?units=imperial&lat=" +
       results.coord.lat +
       "&lon=" +
       results.coord.lon +
       "&appid=" +
       apiKey;
-
+    // -----------five day forecast -------------
     $.ajax({
-      url: queryURLforecast + $(".input").val(),
+      url: queryURLforecast,
       method: "GET",
     }).then(function (fiveday) {
       console.log(fiveday);
-      for (var i = 0; i < 5; i++) {
-        $("#temp" + i).text(fiveday.list[0].main.temp + " °F");
-        $("#humidity" + i).text(fiveday.list[i].main.humidity + " %");
-        $("#date" + i).text(fiveday.list[i].dt_txt);
-        $("#weatherIcon" + i).attr(
-          "src",
-          "http://openweathermap.org/img/wn/" +
-            fiveday.list[i].weather[0].icon +
-            "@2x.png"
+      var day = 0;
+      while (day < 6) {
+        let date = new Date(
+          fiveday.daily[day].dt * 1000
+        ).toLocaleDateString("en-US", { month: "long", day: "numeric" });
+        $("#temp" + day).text(
+          fiveday.daily[day].temp.max +
+            " °F |" +
+            fiveday.daily[day].temp.min +
+            " °F"
         );
+        $("#humidity" + day).text(
+          "Humidity: " + fiveday.daily[day].humidity + " %"
+        );
+        $("#date" + day).text(date);
+        $("#weatherIcon" + day).attr({
+          src:
+            "http://openweathermap.org/img/wn/" +
+            fiveday.daily[day].weather[0].icon +
+            "@2x.png",
+          alt: "weather icon",
+        });
+        day++;
       }
     });
   });

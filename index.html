@@ -30,7 +30,7 @@
       <h1 class="navbar-brand mb-0">Weather Dashboard</h1>
     </nav>
     <main>
-      <div class="row">
+      <div class="row full">
         <div class="col-md-2 leftBar">
           <!-- SEARCH BAR -->
           <div class="search-container">
@@ -52,64 +52,69 @@
             </div>
           </div>
         </div>
-        <div class="col">
+        <div class="col hide" style="display: none;">
           <!-- CURRENT -->
           <div class="card current">
             <div class="card-body">
-              <h1 class="card-title city">
-                <span id="city"></span> ( <span id="date"></span>)
-              </h1>
-              <img alt="Weather Icon" id="weatherIcon" />
+              <h2 class="card-title city">
+                <span id="city"></span><span id="date"></span>
+              </h2>
+              <img id="weatherIcon" />
               <p class="card-text" id="description"></p>
-              <p class="card-text">Temp: <span id="temp"></span></p>
-              <p class="card-text">Humidity: <span id="humidity"></span></p>
-              <p class="card-text">Wind Speed: <span id="windSpeed"></span></p>
-              <p class="card-text">UV Index: <span id="uvIndex"> </span></p>
+              <p class="card-text"><span id="temp"></span></p>
+              <p class="card-text"><span id="humidity"></span></p>
+              <p class="card-text"><span id="windSpeed"></span></p>
+              <p class="card-text"><span id="uvIndex"> </span></p>
             </div>
           </div>
           <!-- FIVE DAY -->
-          <div class="row">
+          <div class="row five">
             <h2>5 Day Forecast</h2>
           </div>
           <div class="row">
             <div class="card fiveCard">
               <div class="card-body fiveDay">
                 <h5 class="card-title" id="date1"></h5>
-                <img src="" alt="weather icon" id="weatherIcon1" />
-                <p class="card-text">Temp: <span id="temp1"></span></p>
-                <p class="card-text">Humidity: <span id="humidity1"></span></p>
+                <img id="weatherIcon1" />
+                <p class="maxMin">max min</p>
+                <p class="card-text"><span id="temp1"></span></p>
+                <p class="card-text"><span id="humidity1"></span></p>
               </div>
             </div>
             <div class="card fiveCard">
               <div class="card-body fiveDay">
                 <h5 class="card-title" id="date2"></h5>
-                <img src="" alt="weather icon" id="weatherIcon2" />
-                <p class="card-text">Temp: <span id="temp2"></span></p>
-                <p class="card-text">Humidity: <span id="humidity2"></span></p>
+                <img id="weatherIcon2" />
+                <p class="maxMin">max min</p>
+                <p class="card-text"><span id="temp2"></span></p>
+                <p class="card-text"><span id="humidity2"></span></p>
               </div>
             </div>
             <div class="card fiveCard">
               <div class="card-body fiveDay">
                 <h5 class="card-title" id="date3"></h5>
-                <img src="" alt="weather icon" id="weatherIcon3" />
-                <p class="card-text">Temp: <span id="temp3"></span></p>
-                <p class="card-text">Humidity: <span id="humidity3"></span></p>
+                <img id="weatherIcon3" />
+                <p class="maxMin">max min</p>
+                <p class="card-text"><span id="temp3"></span></p>
+                <p class="card-text"><span id="humidity3"></span></p>
               </div>
             </div>
             <div class="card fiveCard">
               <div class="card-body fiveDay">
                 <h5 class="card-title" id="date4"></h5>
-                <img src="" alt="weather icon" id="weatherIcon4" />
-                <p class="card-text">Temp: <span id="temp4"></span></p>
-                <p class="card-text">Humidity: <span id="humidity4"></span></p>
+                <img id="weatherIcon4" />
+                <p class="maxMin">max min</p>
+                <p class="card-text"><span id="temp4"></span></p>
+                <p class="card-text"><span id="humidity4"></span></p>
               </div>
             </div>
             <div class="card fiveCard">
               <div class="card-body fiveDay">
                 <h5 class="card-title" id="date5"></h5>
-                <img src="" alt="weather icon" id="weatherIcon5" />
-                <p class="card-text">Temp: <span id="temp5"></span></p>
-                <p class="card-text">Humidity: <span id="humidity5"></span></p>
+                <img id="weatherIcon5" />
+                <p class="maxMin">max min</p>
+                <p class="card-text"><span id="temp5"></span></p>
+                <p class="card-text"><span id="humidity5"></span></p>
               </div>
             </div>
           </div>

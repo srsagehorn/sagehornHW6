@@ -1,13 +1,13 @@
-.navbar {
-  text-align: center;
-}
-
 .search {
   border: 1px solid #ccc;
 }
 
+.full {
+  height: 100%;
+}
+
 .input {
-  width: 80%;
+  width: 70%;
 }
 
 main {
@@ -18,19 +18,24 @@ main {
 
 .leftBar {
   background-color: rgb(232, 232, 232);
-  padding: 20px;
+  padding: 10px;
+}
+
+.fiveCard {
+  padding: 0;
+  margin: 0;
 }
 
 .fiveDay {
-  background-color: blue;
-  color: white;
+  border: 0;
+  border-right: 1px solid rgb(232, 232, 232);
   display: inline;
+  text-align: center;
 }
 
 .card {
   width: 200px;
-  margin: 20px;
-  border-radius: 1%;
+  border: none;
 }
 
 .weatherIcon {
@@ -51,10 +56,25 @@ h2 {
 }
 
 #uvIndex {
-  border: 1px solid black;
-  border-radius: 50%;
+  width: 4px;
+  height: 4px;
+  background-color: red'
 }
 
 .histCard {
-  width: 80%;
+  width: 90%;
+  margin: 20px;
+}
+
+#weatherIcon1, #weatherIcon2, #weatherIcon3, #weatherIcon4{
+height: 75px;
+}
+.maxMin {
+  font-size: 12px;
+  margin-bottom: 0;
+}
+
+h2 {
+  font-size: 40px;
+  text-align: center;
 }
