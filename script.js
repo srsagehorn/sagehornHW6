@@ -7,48 +7,67 @@ var queryURL =
   apiKey +
   "&q=";
 
-var queryURLforecase =
-  "https://api.openweathermap.org/data/2.5/forecast?units=imperial&appid=" +
-  apiKey +
-  "&q=";
-
-function appendHist() {
+function appendSearch() {
   for (var i = 0; i < searchHist.length; i++) {
-    $(".searchHist").append("<li>" + searchHist[i] + "</li>");
-    $("li").attr("class", "list-group-item");
+    $(".searchHist").append(
+      `<li class = "list-group-item"> ${searchHist[i]} </li>`
+    );
   }
 }
+
+localStorage.setItem("History", JSON.stringify(searchHist));
 
 $("button").on("click", function (event) {
   event.preventDefault();
   console.log(searchHist);
-  localStorage.setItem("History", JSON.stringify(searchHist));
-
-  var city = $(".input").val();
   $.ajax({
-    url: queryURL + city,
+    url: queryURL + $(".input").val(),
     method: "GET",
   }).then(function (results) {
     console.log(results);
-
+    // $(".searchHist").text("");
+    searchHist.push(results.name);
+    console.log(searchHist);
+    appendSearch();
     $("#city").text(results.name);
-    $(".searchHist").push(results.name);
     $(".searchHist").text("");
-    appendHist();
     $("#humidity").text(results.main.humidity + " %");
     $("#temp").text(results.main.temp + " °F");
     $("#windSpeed").text(results.wind.speed + " mph");
     $("#description").text(results.weather[0].description);
     // $("#uvIndex").text();
-    // $("#date").text();
-    console.log(results.weather[0].icon);
     $("#weatherIcon").attr(
       "src",
       "http://openweathermap.org/img/wn/" + results.weather[0].icon + "@2x.png"
     );
-    $("#date").text(results.dt_txt);
-    // for (var i = 0; i < results.list.length; i++) {
-    // }
+    var date = new Date(results.dt * 1000).toLocaleDateString("en-US");
+    $("#date").text(date);
+
+    var queryURLforecast =
+      "https://api.openweathermap.org/data/2.5/onecall?lat=" +
+      results.coord.lat +
+      "&lon=" +
+      results.coord.lon +
+      "&appid=" +
+      apiKey;
+
+    $.ajax({
+      url: queryURLforecast + $(".input").val(),
+      method: "GET",
+    }).then(function (fiveday) {
+      console.log(fiveday);
+      for (var i = 0; i < 5; i++) {
+        $("#temp" + i).text(fiveday.list[0].main.temp + " °F");
+        $("#humidity" + i).text(fiveday.list[i].main.humidity + " %");
+        $("#date" + i).text(fiveday.list[i].dt_txt);
+        $("#weatherIcon" + i).attr(
+          "src",
+          "http://openweathermap.org/img/wn/" +
+            fiveday.list[i].weather[0].icon +
+            "@2x.png"
+        );
+      }
+    });
   });
 });
 
@@ -59,7 +78,6 @@ $("button").on("click", function (event) {
 // <!-- uv index in favorable, moderate, or severe color (red yellow green) -->
 // <!-- when click on search history date repopulates-->
 // <!-- on open, presented with last searched city -->
-
 // get Info, add text to ids to 5 day forecast and current
 // uv index condition activates class
 // prepend array

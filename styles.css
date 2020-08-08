@@ -38,6 +38,10 @@ main {
   width: 60px;
 }
 
+#description {
+  font-weight: bold;
+}
+
 h2 {
   margin-left: 20px;
 }
