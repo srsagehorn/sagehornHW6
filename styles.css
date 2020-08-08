@@ -1,13 +1,9 @@
-.search {
-  border: 1px solid #ccc;
-}
-
 .full {
   height: 100%;
 }
 
 .input {
-  width: 70%;
+  width: 80%;
 }
 
 main {
@@ -23,58 +19,124 @@ main {
 
 .fiveCard {
   padding: 0;
-  margin: 0;
-}
-
-.fiveDay {
+  margin-left: 10px;
   border: 0;
-  border-right: 1px solid rgb(232, 232, 232);
   display: inline;
   text-align: center;
+  width: 17%;
+  background-color: rgb(92, 149, 190);
 }
 
 .card {
-  width: 200px;
   border: none;
 }
 
-.weatherIcon {
-  height: 60px;
-  width: 60px;
-}
-
-#description {
-  font-weight: bold;
-}
-
-h2 {
-  margin-left: 20px;
+.one,
+.two,
+.three,
+.four {
+  border-right: 1px solid black);
 }
 
 .current {
-  width: 80%;
+  width: 100%;
+}
+
+.high {
+  background-color: red;
+}
+
+.moderate {
+  background-color: yellow;
+  color: black !important;
+}
+
+.low {
+  background-color: green;
+}
+
+.histCard {
+  width: 100%;
+  margin: 0;
+  margin-top: 20px;
+  margin-left: 0;
+}
+
+h2 {
+  font-size: 40px;
+}
+
+h3 {
+  margin-left: 20px;
+}
+
+.fiveDay {
+  font-size: 30px;
+  margin-top: 60px;
+}
+
+#date {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+#temp {
+  font-size: 50px;
+  font-weight: 600;
+  color: rgb(92, 149, 190);
+}
+
+#highLow {
+  font-size: 16px;
+  margin-top: 0;
+}
+
+#temp {
+  margin-bottom: 0;
+}
+
+#weatherIcon1,
+#weatherIcon2,
+#weatherIcon3,
+#weatherIcon4,
+#weatherIcon5 {
+  height: 50px;
 }
 
 #uvIndex {
   width: 4px;
   height: 4px;
-  background-color: red'
+  color: white;
+  padding: 2px;
 }
 
-.histCard {
-  width: 90%;
-  margin: 20px;
+#weatherIcon {
+  height: 150px;
+  width: 150px;
+  margin-bottom: 16px;
 }
 
-#weatherIcon1, #weatherIcon2, #weatherIcon3, #weatherIcon4{
-height: 75px;
-}
-.maxMin {
-  font-size: 12px;
-  margin-bottom: 0;
+#description {
+  font-size: 24px;
 }
 
-h2 {
-  font-size: 40px;
-  text-align: center;
+#padding {
+  padding: 15px;
+}
+
+.moveUp {
+  position: relative;
+  top: -26px;
+}
+
+.submit {
+  background-color: rgb(92, 149, 190);
+}
+
+.fa {
+  filter: invert(100%);
+}
+
+nav {
+  background-color: rgb(92, 149, 190);
 }
