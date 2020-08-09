@@ -9,37 +9,28 @@ var queryURL =
 
 localStorage.setItem("History", JSON.stringify(searchHist));
 
-//--------------if you click list item-----------
-
-// $(".list-group-item").on("click", function (event) {
-
-// }
-
-//--------------current---------------
-$("button").on("click", function (event) {
-  event.preventDefault();
-  $(".searchHist").text("");
-  console.log(searchHist);
+function getWeather() {
   $.ajax({
-    url: queryURL + $(".input").val(),
+    url: queryURL + city,
     method: "GET",
   }).then(function (results) {
     console.log(results);
     $(".hide").removeAttr("style");
-    $(".input").val("");
+
     // push it to the array and put it on screen as past searched
-    searchHist.push(results.name);
-    console.log(searchHist);
+    if (!searchHist.includes(results.name)) {
+      searchHist.push(results.name);
+    }
     localStorage.setItem("History", searchHist);
     for (var i = 0; i < searchHist.length; i++) {
       $(".searchHist").prepend(
-        `<button class = "list-group-item"> ${searchHist[i]} </button>`
+        `<button class = "list-group-item">${searchHist[i]} </button>`
       );
     }
     // put in info from api
     $("#city").text(results.name);
     $("#humidity").text("Humidity: " + results.main.humidity + " %");
-    $("#temp").text(results.main.temp + " °");
+    $("#temp").text(results.main.temp.toString().slice(0, 2) + " °");
     $("#windSpeed").text("Wind Speed: " + results.wind.speed + " mph");
     $("#description").text(results.weather[0].description);
     $("#weatherIcon").attr({
@@ -53,9 +44,7 @@ $("button").on("click", function (event) {
       month: "long",
       day: "numeric",
     });
-
-    $("#date").text(date);
-    console.log(results.coord.lat);
+    $("#date").text(date + "th");
 
     var queryURLforecast =
       "https://api.openweathermap.org/data/2.5/onecall?units=imperial&lat=" +
@@ -83,25 +72,28 @@ $("button").on("click", function (event) {
 
       // high low on current
       $("#highLow").text(
-        fiveday.daily[0].temp.max + " ° | " + fiveday.daily[0].temp.min + " °"
+        fiveday.daily[0].temp.max.toString().slice(0, 2) +
+          " ° | " +
+          fiveday.daily[0].temp.min.toString().slice(0, 2) +
+          " °"
       );
 
       // -----------five day forecast -------------
-      var day = 0;
+      let day = 0;
       while (day < 6) {
         let date = new Date(
           fiveday.daily[day].dt * 1000
         ).toLocaleDateString("en-US", { month: "long", day: "numeric" });
         $("#temp" + day).text(
-          fiveday.daily[day].temp.max +
+          fiveday.daily[day].temp.max.toString().slice(0, 2) +
             " ° | " +
-            fiveday.daily[day].temp.min +
+            fiveday.daily[day].temp.min.toString().slice(0, 2) +
             " °"
         );
         $("#humidity" + day).text(
           "Humidity: " + fiveday.daily[day].humidity + " %"
         );
-        $("#date" + day).text(date);
+        $("#date" + day).text(date + "th");
         $("#weatherIcon" + day).attr({
           src:
             "http://openweathermap.org/img/wn/" +
@@ -113,11 +105,33 @@ $("button").on("click", function (event) {
       }
     });
   });
+}
+
+//--------------list item buttons-----------
+
+$(".list-group-item").on("click", function (event) {
+  event.preventDefault;
+  city = $(this).text();
+  getWeather();
+  console.log("yes");
 });
 
-// <!-- add city to search history -->
+//--------------search button---------------
+$("button").on("click", function (event) {
+  event.preventDefault();
+  $(".searchHist").text("");
+  city = $(".input").val();
+  getWeather();
+  $(".input").val("");
+});
+
+// function init() {
+//   let city = localStorage.getItem.history[0];
+
+//   searchHist[searchHist.length];
+//   getWeather();
+// }
+
+// init();
 // <!-- when click on search history date repopulates-->
 // <!-- on open, presented with last searched city -->
-// get Info, add text to ids to 5 day forecast and current
-// prepend array
-// save array to local storage and appear with first item in array
